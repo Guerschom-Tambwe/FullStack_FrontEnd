@@ -1,0 +1,23 @@
+.nav-link {
+    color: #af0868;
+}
+
+.btn-outline-danger:hover {
+    background: #af0868 !important;
+    color: #f8f9fa;
+
+}
+
+#SellAHomeButton{
+    border-color: #af0868 !important;
+}
+
+.btn-outline-danger {
+    color: #af0868;
+}
+
+.nav-link-auth, .nav-link-admin {
+    font-size: 0.8em;
+    color: white;
+    letter-spacing: 0.8px;
+}

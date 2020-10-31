@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+
+
+.nav-link {
+    color: #af0868;
+    font-family: 'Rubik', sans-serif;;
+}
+
+.btn-outline-danger:hover {
+    background: #af0868 !important;
+    color: #f8f9fa;
+
+}
+
+#SellAHomeButton{
+    border-color: #af0868 !important;
+    font-family: 'Rubik', sans-serif;;
+}
+
+.btn-outline-danger {
+    color: #af0868;
+}
+
+.nav-link-auth, .nav-link-admin {
+    font-size: 1em;
+    color: white;
+    letter-spacing: 0.8px;
+}
