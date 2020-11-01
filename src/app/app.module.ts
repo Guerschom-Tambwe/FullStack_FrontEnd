@@ -12,10 +12,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';;
-import { MainNavigationComponent } from './shared/main-navigation/main-navigation.component';
+import { MainNavigationComponent } from './shared/main-navigation/main-navigation.component'
+;
 import { SubMenuComponent } from './shared/sub-menu/sub-menu.component'
 ;
-import { FooterComponent } from './shared/footer/footer.component'
+import { FooterComponent } from './shared/footer/footer.component';
+import { RegisterComponent } from './register/register.component'
 @NgModule({
     imports: [
         BrowserModule,
@@ -26,11 +28,13 @@ import { FooterComponent } from './shared/footer/footer.component'
     declarations: [
         AppComponent,
         HomeComponent,
-        LoginComponent,
+        LoginComponent
+,
         MainNavigationComponent
 ,
         SubMenuComponent ,
-        FooterComponent   ],
+        FooterComponent ,
+        RegisterComponent  ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
