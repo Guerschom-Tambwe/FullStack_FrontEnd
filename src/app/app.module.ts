@@ -16,8 +16,12 @@ import { MainNavigationComponent } from './shared/main-navigation/main-navigatio
 ;
 import { SubMenuComponent } from './shared/sub-menu/sub-menu.component'
 ;
-import { FooterComponent } from './shared/footer/footer.component';
+import { FooterComponent } from './shared/footer/footer.component'
+;
 import { RegisterComponent } from './register/register.component'
+;
+import { MyAdvertsComponent } from './my-adverts/my-adverts.component';
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -34,7 +38,8 @@ import { RegisterComponent } from './register/register.component'
 ,
         SubMenuComponent ,
         FooterComponent ,
-        RegisterComponent  ],
+        RegisterComponent ,
+        MyAdvertsComponent ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
