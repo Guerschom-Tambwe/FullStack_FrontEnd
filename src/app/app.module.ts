@@ -20,7 +20,8 @@ import { FooterComponent } from './shared/footer/footer.component'
 ;
 import { RegisterComponent } from './register/register.component'
 ;
-import { MyAdvertsComponent } from './my-adverts/my-adverts.component';
+import { MyAdvertsComponent } from './my-adverts/my-adverts.component';;
+import { AlertComponent } from './shared/alert/alert.component'
 
 @NgModule({
     imports: [
@@ -39,7 +40,8 @@ import { MyAdvertsComponent } from './my-adverts/my-adverts.component';
         SubMenuComponent ,
         FooterComponent ,
         RegisterComponent ,
-        MyAdvertsComponent ],
+        MyAdvertsComponent ,
+        AlertComponent],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

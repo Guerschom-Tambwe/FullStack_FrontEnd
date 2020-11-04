@@ -4,6 +4,9 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { debounceTime, first } from 'rxjs/operators';
 
 import { AuthenticationService } from '@app/_services';
+import { AccountService } from '@app/_services/account.service';
+import { AlertService } from '@app/_services/alert.service';
+import { User } from '@app/_models';
 
 @Component(
     { 
@@ -12,7 +15,7 @@ import { AuthenticationService } from '@app/_services';
     })
 
 export class LoginComponent implements OnInit {
-    
+    currentUser: User;
     loginForm: FormGroup;
     loading = false;
     submitted = false;
@@ -26,17 +29,20 @@ export class LoginComponent implements OnInit {
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
-        private authenticationService: AuthenticationService) 
+        private accountService: AccountService,
+        private alertService: AlertService) 
         { 
+            this.accountService.currentUser.subscribe(x => this.currentUser = x);
+        /*if (this.accountService.currentUserValue) { 
+            this.router.navigate(['/home']);
+        }*/
 
-        if (this.authenticationService.currentUserValue) { 
-            this.router.navigate(['/']);
-        }
-
-        console.log(this.authenticationService.currentUserValue);
     }
 
     ngOnInit() {
+        if(this.currentUser){
+            this.router.navigate(['/my-adverts']);
+        }
 
         this.loginForm = this.formBuilder.group({
             email: ['', Validators.email],
@@ -78,13 +84,16 @@ export class LoginComponent implements OnInit {
     onSubmit() {
         this.submitted = true;
 
+        // reset alerts on submit
+        this.alertService.clear();
+
         // stop here if form is invalid
         if (this.loginForm.invalid) {
             return;
         }
 
         this.loading = true;
-        this.authenticationService.login(this.f.email.value, this.f.password.value)
+        this.accountService.login(this.f.email.value, this.f.password.value)
             .pipe(first())
             .subscribe(
                 data => {
