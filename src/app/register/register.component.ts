@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MustMatch } from '@app/_helpers/must-match-validator';
+import { Role } from '@app/_models/role';
 import { AccountService, AlertService } from '@app/_services';
 import { debounceTime, first } from 'rxjs/operators';
 
@@ -10,6 +11,7 @@ import { debounceTime, first } from 'rxjs/operators';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.less']
 })
+
 export class RegisterComponent implements OnInit {
   registrationForm: FormGroup;
   loading: boolean = false;
@@ -72,7 +74,8 @@ export class RegisterComponent implements OnInit {
     email: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(100), 
                  Validators.email ]],
     password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(100)]],
-    confirmPassword: ['', Validators.required]
+    confirmPassword: ['', Validators.required],
+    role: Role.User
   },
   {
     validator: MustMatch('password', 'confirmPassword')

@@ -28,7 +28,7 @@ export class AccountService {
         return this.http.post<User>(`${environment.apiUrl}/users/authenticate`, { email, password })
             .pipe(map(user => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('cuser', JSON.stringify(user));
+                localStorage.setItem('currentUser', JSON.stringify(user));
                 this.currentUserSubject.next(user);
                 return user;
             }));
@@ -36,7 +36,7 @@ export class AccountService {
 
     logout() {
         // remove user from local storage and set current user to null
-        localStorage.removeItem('user');
+        localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
         this.router.navigate(['/account/login']);
     }

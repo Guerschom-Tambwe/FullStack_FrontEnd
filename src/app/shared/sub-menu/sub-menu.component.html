@@ -1,7 +1,7 @@
 <nav class="mb-1 navbar navbar-expand-lg primary-color border" id="AuthNavbar" *ngIf="currentUser">
     <div class="container">
     <div class="collapse navbar-collapse primary-color" id="navbarSupportedContent-333">
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav mr-auto" *ngIf="currentUser && currentUser.role == 'User'">
         <li class="nav-item active">
             <a class="nav-item nav-link nav-link-auth font-weight-bold" routerLink="/">My Profile
             <span class="sr-only">(current)</span>
@@ -26,15 +26,15 @@
             <a class="nav-link nav-link-auth font-weight-bold" href="#">Favourite Houses</a>
         </li>
       </ul>
-      <!-- For Authorized User
-          <ul class="navbar-nav ml-auto">
+
+      <ul class="navbar-nav mr-auto" *ngIf="currentUser && currentUser.role == 'Admin'">
         <li class="nav-item">
             <a class="nav-link nav-link-admin font-weight-bold" href="#">User Management</a>
         </li>
         <li class="nav-item">
             <a class="nav-link nav-link-admin font-weight-bold" href="#">Advert Management</a>
         </li>
-    </ul>-->
+    </ul>
     </div>
     </div>
   </nav>

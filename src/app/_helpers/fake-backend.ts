@@ -2,10 +2,12 @@
 import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, materialize, dematerialize } from 'rxjs/operators';
+import { User } from '@app/_models';
+import { Role } from '@app/_models/role';
 
 // array in local storage for registered users
 const usersKey = 'users';
-let users = JSON.parse(localStorage.getItem(usersKey)) || [];
+let users = JSON.parse(localStorage.getItem(usersKey))|| [];
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -115,8 +117,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         }
 
         function basicDetails(user) {
-            const { id, username, firstName, lastName } = user;
-            return { id, username, firstName, lastName };
+            const { id, forenames, role } = user;
+            return { id, forenames, role };
         }
 
         function isLoggedIn() {
