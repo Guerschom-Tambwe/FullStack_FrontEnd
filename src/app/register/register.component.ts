@@ -126,7 +126,6 @@ confirmPasswordControl.valueChanges.pipe(
     if((c.touched || c.dirty) && c.errors){
       this.forenamesValidationMessage = Object.keys(c.errors).map(
         key => this.forenamesValidationMessages[key]).join(' ');
-        console.log(this.forenamesValidationMessage)
     }
 
   }
@@ -152,7 +151,6 @@ confirmPasswordControl.valueChanges.pipe(
     if((c.touched || c.dirty) && c.errors){
       this.passwordValidationMessage = Object.keys(c.errors).map(
         key => this.passwordValidationMessages[key]).join(' ');
-        console.log(this.passwordValidationMessage)
     }
   }
 

@@ -25,6 +25,19 @@ export class LoginComponent implements OnInit {
     emailValidationErrorMessage: string;
     passwordValidationErrorMessage: string;
 
+    private emailValidationMessages = {
+        required: 'Please enter your email address.',
+        email: 'Please enter a valid Email address.',
+        minlength: 'Please enter at least 6 characters.',
+        maxlength: 'Please enter no more than 100 characters.'
+      }
+    
+      private passwordValidationMessages = {
+        required: 'Please enter your password.',
+        minlength: 'The Password must be longer than 8 characters.',
+        maxlength: 'Please enter no more than 100 characters.'
+      }
+
     constructor(
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
@@ -45,36 +58,49 @@ export class LoginComponent implements OnInit {
         }
 
         this.loginForm = this.formBuilder.group({
-            email: ['', Validators.email],
-            password: ['', Validators.required]
+            email: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(100), 
+                         Validators.email ]],
+            password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(100)]],
         });
 
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/my-adverts';
 
         const emailInputControl = this.loginForm.get('email');
-        emailInputControl.valueChanges.pipe(debounceTime(1000))
-        .subscribe( value => this.setEmailErrorMessage(emailInputControl));
+
+        emailInputControl.valueChanges.pipe(
+            debounceTime(1000))
+        .subscribe( value => 
+            this.setEmailErrorMessage(emailInputControl));
 
         const passwordInputControl = this.loginForm.get('password');
-        passwordInputControl.valueChanges.pipe(debounceTime(1000))
-        .subscribe( value => this.setPasswordErrorMessage(passwordInputControl));
+
+        passwordInputControl.valueChanges.pipe(
+            debounceTime(1000))
+        .subscribe( value => 
+            this.setPasswordErrorMessage(passwordInputControl));
         
         }
         
-    setPasswordErrorMessage(c: AbstractControl): void {
-        this.passwordValidationErrorMessage = '';
-        if((c.touched || c.dirty) && c.errors)
+    setPasswordErrorMessage(c: AbstractControl): void 
+    {
+    this.passwordValidationErrorMessage = '';  
+
+    if((c.touched || c.dirty) && c.errors)
         {
-        this.passwordValidationErrorMessage = 'Please enter your password.';
+        this.passwordValidationErrorMessage = Object.keys(c.errors).map(
+            key => this.passwordValidationMessages[key]).join(' ');
         }
     }
 
 
-    setEmailErrorMessage(c: AbstractControl): void {
-        this.emailValidationErrorMessage = '';
-        if((c.touched || c.dirty) && c.errors)
+    setEmailErrorMessage(c: AbstractControl): void 
+    {
+    this.emailValidationErrorMessage = '';
+        
+    if((c.touched || c.dirty) && c.errors)
         {
-        this.emailValidationErrorMessage = 'Please enter a valid email address';
+        this.emailValidationErrorMessage =Object.keys(c.errors).map(
+            key => this.emailValidationMessages[key]).join(' ');
         }
     }
 
