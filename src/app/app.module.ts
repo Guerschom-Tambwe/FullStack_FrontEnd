@@ -25,6 +25,8 @@ import { AlertComponent } from './shared/alert/alert.component'
 
 @NgModule({
     imports: [
+
+        
         BrowserModule,
         ReactiveFormsModule,
         HttpClientModule,
@@ -33,10 +35,8 @@ import { AlertComponent } from './shared/alert/alert.component'
     declarations: [
         AppComponent,
         HomeComponent,
-        LoginComponent
-,
-        MainNavigationComponent
-,
+        LoginComponent,
+        MainNavigationComponent,
         SubMenuComponent ,
         FooterComponent ,
         RegisterComponent ,

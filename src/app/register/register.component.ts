@@ -24,7 +24,7 @@ export class RegisterComponent implements OnInit {
 
   private forenamesValidationMessages = {
     required: 'Please enter your forename(s)',
-    pattern: 'Only letters, and spaces BETWEEN your forenames, are accepted',
+    pattern: 'Only letters, and SINGLE spaces BETWEEN your forenames, are accepted',
     minlength: 'Please enter at least 1 character',
     maxlength: 'Please enter no more than 100 characters'
   }
@@ -65,11 +65,12 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.registrationForm = this.formBuilder.group({
     forenames: ['', [Validators.required, Validators.minLength(1), 
-                     Validators.maxLength(100), Validators.pattern("^[A-Za-z- {1}]*[[A-Za-z]$")]],
+                     Validators.maxLength(100), 
+                     Validators.pattern("^[a-zA-Z](?!.*  )[a-zA-Z ]*[a-zA-Z]$")]],
     surname: ['', [Validators.required, Validators.minLength(3), 
                     Validators.maxLength(100), Validators.pattern("^[A-Za-z-{1}]+[A-Za-z]$")]],
     email: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(100), 
-                 Validators.email]],
+                 Validators.email ]],
     password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(100)]],
     confirmPassword: ['', Validators.required]
   },

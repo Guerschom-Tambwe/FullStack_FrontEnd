@@ -1,4 +1,4 @@
-import { FormGroup } from '@angular/forms';
+import { AbstractControl, FormGroup, ValidatorFn } from '@angular/forms';
 
 // custom validator to check that two fields match
 export function MustMatch(controlName: string, matchingControlName: string) {
@@ -18,4 +18,14 @@ export function MustMatch(controlName: string, matchingControlName: string) {
             matchingControl.setErrors(null);
         }
     }
+}
+
+export function range(): ValidatorFn{
+    return (c: AbstractControl): { [key: string]: boolean } | null => {
+        if (c.value.length < 5) {
+          return { range: true };
+        }
+        return null;
+      };
+
 }

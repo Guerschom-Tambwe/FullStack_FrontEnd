@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '@app/_models';
-import { AuthenticationService } from '@app/_services';
+import { AccountService, AuthenticationService } from '@app/_services';
 
 @Component({
   selector: 'app-sub-menu',
@@ -9,9 +9,9 @@ import { AuthenticationService } from '@app/_services';
 })
 export class SubMenuComponent implements OnInit {
   currentUser: User;
-  constructor(private authenticationService: AuthenticationService) 
+  constructor(private accountService: AccountService) 
   { 
-    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+    this.accountService.currentUser.subscribe(x => this.currentUser = x);
   }
 
   ngOnInit(): void {
