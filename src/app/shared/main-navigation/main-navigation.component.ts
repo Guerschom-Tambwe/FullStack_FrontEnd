@@ -20,7 +20,7 @@ export class MainNavigationComponent implements OnInit {
   
   logout() {
     this.accountService.logout();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/home']);
 }
 
 }

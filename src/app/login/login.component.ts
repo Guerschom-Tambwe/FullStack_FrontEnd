@@ -3,7 +3,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { debounceTime, first } from 'rxjs/operators';
 
-import { AuthenticationService } from '@app/_services';
 import { AccountService } from '@app/_services/account.service';
 import { AlertService } from '@app/_services/alert.service';
 import { User } from '@app/_models';
@@ -18,7 +17,7 @@ export class LoginComponent implements OnInit {
     currentUser: User;
     loginForm: FormGroup;
     loading = false;
-    submitted = false;
+    //submitted = false;
     returnUrl: string;
     error = '';
 
@@ -46,16 +45,13 @@ export class LoginComponent implements OnInit {
         private alertService: AlertService) 
         { 
             this.accountService.currentUser.subscribe(x => this.currentUser = x);
-        /*if (this.accountService.currentUserValue) { 
+        if (this.accountService.currentUserValue) { 
             this.router.navigate(['/home']);
-        }*/
+        }
 
     }
 
     ngOnInit() {
-        if(this.currentUser){
-            this.router.navigate(['/my-adverts']);
-        }
 
         this.loginForm = this.formBuilder.group({
             email: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(100), 
@@ -63,7 +59,7 @@ export class LoginComponent implements OnInit {
             password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(100)]],
         });
 
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/my-adverts';
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
 
         const emailInputControl = this.loginForm.get('email');
 
@@ -108,7 +104,7 @@ export class LoginComponent implements OnInit {
     get f() { return this.loginForm.controls; }
 
     onSubmit() {
-        this.submitted = true;
+        //this.submitted = true;
 
         // reset alerts on submit
         this.alertService.clear();

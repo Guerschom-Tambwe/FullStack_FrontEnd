@@ -1,7 +1,7 @@
-﻿<div class="col-md-5 mx-auto mt-5 shadow" >
+﻿<div class="col-md-5 login mx-auto mt-5 shadow rounded" >
     <alert></alert>
     <form novalidate  class=" p-5"  [formGroup]="loginForm" (ngSubmit)="onSubmit()" >
-        <p class="h3 login-heading mb-3 text-center">Login</p>
+        <p class="h3 mb-3 text-center">Login</p>
         <hr/>
 
             <div class="form-group">
@@ -22,7 +22,7 @@
                     placeholder="Password (Required)" 
                     formControlName="password" 
                     [ngClass]="{'is-invalid': passwordValidationErrorMessage }">
-                <span class="invalid-feedback">{{passwordValidationErrorMessage}}</span>  
+                <span class="invalid-feedback" *ngIf="">{{passwordValidationErrorMessage}}</span>  
             </div>
 
             <button 

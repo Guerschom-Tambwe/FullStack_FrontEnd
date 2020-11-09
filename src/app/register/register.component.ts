@@ -16,6 +16,8 @@ export class RegisterComponent implements OnInit {
   registrationForm: FormGroup;
   loading: boolean = false;
   submitted: boolean = false;
+  returnUrl: string;
+  error = '';
 
   forenamesValidationMessage: string;
   emailValidationMessage: string;
@@ -45,7 +47,7 @@ export class RegisterComponent implements OnInit {
     maxlength: 'Please enter no more than 100 characters'
   }
 
-  private passwordValidationMessages = {
+  public passwordValidationMessages = {
     required: 'Please enter your password',
     minlength: 'The Password must be longer than 8 characters.',
     maxlength: 'Please enter no more than 100 characters'
@@ -81,6 +83,8 @@ export class RegisterComponent implements OnInit {
     validator: MustMatch('password', 'confirmPassword')
 }
   );
+
+  this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/my-adverts';
 
 //Observing changes to form controls one-by-one
 const forenamesControl = this.registrationForm.get('forenames');
@@ -182,15 +186,25 @@ confirmPasswordControl.valueChanges.pipe(
        this.accountService.register(this.registrationForm.value)
            .pipe(first())
            .subscribe({
-               next: () => {
-                   this.alertService.success('Registration successful', { keepAfterRouteChange: true });
-                   this.router.navigate(['../login'], { relativeTo: this.route });
-               },
+               next: () => {},
                error: error => {
                    this.alertService.error(error);
                    this.loading = false;
+                   return;
                }
            });
+
+           this.accountService.login(this.f.email.value, this.f.password.value)
+           .pipe(first())
+           .subscribe(
+               data => {
+                   this.alertService.success('You are successfully Registered with ToLet', { keepAfterRouteChange: true });
+                   this.router.navigate([this.returnUrl]);
+               },
+               error => {
+                   this.error = error;
+                   this.loading = false;
+               });
    }
 
 }
