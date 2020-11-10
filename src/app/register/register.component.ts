@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MustMatch } from '@app/_helpers/must-match-validator';
-import { Role } from '@app/_models/role';
 import { AccountService, AlertService } from '@app/_services';
 import { debounceTime, first } from 'rxjs/operators';
 
@@ -17,7 +16,7 @@ export class RegisterComponent implements OnInit {
   loading: boolean = false;
   submitted: boolean = false;
   returnUrl: string;
-  error = '';
+  error: string = '';
 
   forenamesValidationMessage: string;
   emailValidationMessage: string;
@@ -77,7 +76,6 @@ export class RegisterComponent implements OnInit {
                  Validators.email ]],
     password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(100)]],
     confirmPassword: ['', Validators.required],
-    role: Role.User
   },
   {
     validator: MustMatch('password', 'confirmPassword')
@@ -160,7 +158,7 @@ confirmPasswordControl.valueChanges.pipe(
 
   
    // convenience getter for easy access to form fields
-   get f() { return this.registrationForm.controls; }
+   get f(): { [key: string]: AbstractControl } { return this.registrationForm.controls; }
 
    setConfirmPasswordValidationMessage(c: AbstractControl): void {
     var confirmPasswordControl = this.f.confirmPassword;
@@ -171,7 +169,7 @@ confirmPasswordControl.valueChanges.pipe(
     }
   }
 
-   onSubmit() {
+   onSubmit():void {
        this.submitted = true;
 
        // reset alerts on submit
@@ -186,25 +184,22 @@ confirmPasswordControl.valueChanges.pipe(
        this.accountService.register(this.registrationForm.value)
            .pipe(first())
            .subscribe({
-               next: () => {},
+               next: () => {
+              this.accountService.login(this.f.email.value, this.f.password.value)
+              .pipe(first())
+              .subscribe(
+                  data => {
+                    this.alertService.success('Thank you for registering with ToLet.', 
+                    { keepAfterRouteChange: true });
+                      this.router.navigate([this.returnUrl]);
+                  })
+               },
                error: error => {
-                   this.alertService.error(error);
+                   this.error = error
                    this.loading = false;
-                   return;
+                   
                }
            });
-
-           this.accountService.login(this.f.email.value, this.f.password.value)
-           .pipe(first())
-           .subscribe(
-               data => {
-                   this.alertService.success('You are successfully Registered with ToLet', { keepAfterRouteChange: true });
-                   this.router.navigate([this.returnUrl]);
-               },
-               error => {
-                   this.error = error;
-                   this.loading = false;
-               });
    }
 
 }

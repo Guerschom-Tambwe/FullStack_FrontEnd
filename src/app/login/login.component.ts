@@ -6,6 +6,7 @@ import { debounceTime, first } from 'rxjs/operators';
 import { AccountService } from '@app/_services/account.service';
 import { AlertService } from '@app/_services/alert.service';
 import { User } from '@app/_models';
+import { StringDecoder } from 'string_decoder';
 
 @Component(
     { 
@@ -17,9 +18,8 @@ export class LoginComponent implements OnInit {
     currentUser: User;
     loginForm: FormGroup;
     loading = false;
-    //submitted = false;
     returnUrl: string;
-    error = '';
+    error: string = '';
 
     emailValidationErrorMessage: string;
     passwordValidationErrorMessage: string;
@@ -62,14 +62,12 @@ export class LoginComponent implements OnInit {
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
 
         const emailInputControl = this.loginForm.get('email');
-
         emailInputControl.valueChanges.pipe(
             debounceTime(1000))
         .subscribe( value => 
             this.setEmailErrorMessage(emailInputControl));
 
         const passwordInputControl = this.loginForm.get('password');
-
         passwordInputControl.valueChanges.pipe(
             debounceTime(1000))
         .subscribe( value => 
@@ -101,9 +99,9 @@ export class LoginComponent implements OnInit {
     }
 
     // convenience getter for easy access to form fields
-    get f() { return this.loginForm.controls; }
+    get f(): { [key: string]: AbstractControl } { return this.loginForm.controls; }
 
-    onSubmit() {
+    onSubmit():void {
         //this.submitted = true;
 
         // reset alerts on submit

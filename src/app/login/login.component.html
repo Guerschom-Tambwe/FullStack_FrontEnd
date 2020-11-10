@@ -7,8 +7,8 @@
             <div class="form-group">
                 <input 
                     type="text" 
-                    class="form-control text-center" 
-                    placeholder="Email (Required)" 
+                    class="form-control" 
+                    placeholder="Email (required, 6 to 100 characters)" 
                     formControlName="email" 
                     [ngClass]="{'is-invalid': emailValidationErrorMessage }"
                 >
@@ -18,8 +18,8 @@
             <div class="form-group">    
                 <input 
                     type="password" 
-                    class="form-control text-center" 
-                    placeholder="Password (Required)" 
+                    class="form-control" 
+                    placeholder="Password (required, 8 to 100 characters)" 
                     formControlName="password" 
                     [ngClass]="{'is-invalid': passwordValidationErrorMessage }">
                 <span class="invalid-feedback" *ngIf="">{{passwordValidationErrorMessage}}</span>  

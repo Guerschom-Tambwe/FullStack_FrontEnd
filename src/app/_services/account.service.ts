@@ -24,8 +24,8 @@ export class AccountService {
         return this.currentUserSubject.value;
     }
 
-    login(email, password) {
-        return this.http.post<User>(`${environment.apiUrl}/users/authenticate`, { email, password })
+    login(email: string, password: string):Observable<User> {
+       return this.http.post<User>(`${environment.apiUrl}/api/users/authenticate`, { email, password })
             .pipe(map(user => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('currentUser', JSON.stringify(user));
@@ -34,26 +34,26 @@ export class AccountService {
             }));
     }
 
-    logout() {
+    logout():void {
         // remove user from local storage and set current user to null
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
         this.router.navigate(['/home']);
     }
 
-    register(user: User) {
-        return this.http.post(`${environment.apiUrl}/users/register`, user);
+    register(user: User) :Observable<Object>{
+        return this.http.post(`${environment.apiUrl}/api/users/newuser/register`, user);
     }
 
-    getAll() {
+    getAll():Observable<User[]> {
         return this.http.get<User[]>(`${environment.apiUrl}/users`);
     }
 
-    getById(id: string) {
+    getById(id: string):Observable<User> {
         return this.http.get<User>(`${environment.apiUrl}/users/${id}`);
     }
 
-    update(id, params) {
+    update(id:number, params: object):Observable<Object> {
         return this.http.put(`${environment.apiUrl}/users/${id}`, params)
             .pipe(map(x => {
                 // update stored user if the logged in user updated their own record
@@ -69,7 +69,7 @@ export class AccountService {
             }));
     }
 
-    delete(id: string) {
+    delete(id: string):Observable<Object> {
         return this.http.delete(`${environment.apiUrl}/users/${id}`)
             .pipe(map(x => {
                 // auto logout if the logged in user deleted their own record

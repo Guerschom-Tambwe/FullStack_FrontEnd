@@ -10,6 +10,7 @@ import { AccountService } from '@app/_services';
 })
 export class MainNavigationComponent implements OnInit {
   currentUser: User;
+  
   constructor(private router: Router, private accountService: AccountService) { 
     this.accountService.currentUser.subscribe(x => this.currentUser = x);
   }
