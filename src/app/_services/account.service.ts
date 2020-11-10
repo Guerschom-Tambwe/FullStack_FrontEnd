@@ -41,20 +41,20 @@ export class AccountService {
         this.router.navigate(['/home']);
     }
 
-    register(user: User) :Observable<Object>{
-        return this.http.post(`${environment.apiUrl}/api/users/newuser/register`, user);
+    register(user: User) :Observable<User>{
+        return this.http.post<User>(`${environment.apiUrl}/api/users/newuser/register`, user);
     }
 
-    getAll():Observable<User[]> {
-        return this.http.get<User[]>(`${environment.apiUrl}/users`);
+    getAll(): Observable<User> {
+        return this.http.get<User>(`${environment.apiUrl}/users`);
     }
 
     getById(id: string):Observable<User> {
         return this.http.get<User>(`${environment.apiUrl}/users/${id}`);
     }
 
-    update(id:number, params: object):Observable<Object> {
-        return this.http.put(`${environment.apiUrl}/users/${id}`, params)
+    update(id:number, params: object): Observable<User> {
+        return this.http.put<User>(`${environment.apiUrl}/users/${id}`, params)
             .pipe(map(x => {
                 // update stored user if the logged in user updated their own record
                 if (id == this.currentUserValue.id) {
@@ -69,8 +69,8 @@ export class AccountService {
             }));
     }
 
-    delete(id: string):Observable<Object> {
-        return this.http.delete(`${environment.apiUrl}/users/${id}`)
+    delete(id: string): Observable<User> {
+        return this.http.delete<User>(`${environment.apiUrl}/users/${id}`)
             .pipe(map(x => {
                 // auto logout if the logged in user deleted their own record
                 if (id == this.currentUserValue.id.toString()) {

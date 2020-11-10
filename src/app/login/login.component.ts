@@ -6,7 +6,6 @@ import { debounceTime, first } from 'rxjs/operators';
 import { AccountService } from '@app/_services/account.service';
 import { AlertService } from '@app/_services/alert.service';
 import { User } from '@app/_models';
-import { StringDecoder } from 'string_decoder';
 
 @Component(
     { 
@@ -51,7 +50,7 @@ export class LoginComponent implements OnInit {
 
     }
 
-    ngOnInit() {
+    ngOnInit():void {
 
         this.loginForm = this.formBuilder.group({
             email: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(100), 
