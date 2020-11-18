@@ -6,7 +6,6 @@ import { catchError, tap, map } from 'rxjs/operators';
 
 import { Province } from '../_models';
 import { environment } from '@environments/environment';
-import { City } from '@app/_models/city';
 
 
 @Injectable({
@@ -34,15 +33,6 @@ getProvinces(): Observable<Province[]>{
     return this.http.get<Province>(url)
       .pipe(
         //tap(data => console.log('getUser: ' + JSON.stringify(data))),
-        catchError(this.handleError)
-      );
-  }
-
-  getCityByProvince(provinceName: string): Observable<Province> {
-    const url = `${this.provincesUrl}/${provinceName}/cities`;
-    return this.http.get<Province>(url)
-      .pipe(
-        tap(data => data),
         catchError(this.handleError)
       );
   }

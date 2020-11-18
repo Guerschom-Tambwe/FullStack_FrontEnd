@@ -111,8 +111,6 @@ export class AdvertsEditComponent implements OnInit {
   }
 
 
-
-
   displayAdvert(advert: Advert): void {
     if (this.advertsForm) {
       this.advertsForm.reset();
@@ -162,15 +160,10 @@ export class AdvertsEditComponent implements OnInit {
      provinceControl.valueChanges.pipe(
        debounceTime(1000)
      ).subscribe(
-       value => { 
-         this.provinceService.getCityByProvince(value).subscribe({
-        next: province => {
-          if(province !== null){
-          this.provinceCities = province.cities;
-          }
-        },
-        error: err => this.errorMessage = err
-      });}
+       value => {
+         let provinces:Province[] = this.provinces.filter(x => x.provinceName == value);
+         this.provinceCities = provinces[0].cities;
+        }
      );
 }
 
@@ -211,23 +204,6 @@ setPriceValidationMessage(c: AbstractControl):void {
   if((c.touched || c.dirty) && c.errors){
     this.priceValidationMessage = Object.keys(c.errors).map(
       key => this.priceValidationMessages[key]).join(' ');
-  }
-}
-
-
-
-
-deleteAd(): void {
-  if (this.advert.advertId === 0) {
-    this.onSaveComplete();
-  } else {
-    if (confirm(`Really delete the ad: ${this.advert.headline}?`)) {
-      this.adService.deleteAd(this.advert.advertId)
-        .subscribe({
-          next: () => this.onSaveComplete(),
-          error: err => this.errorMessage = err
-        });
-    }
   }
 }
 
