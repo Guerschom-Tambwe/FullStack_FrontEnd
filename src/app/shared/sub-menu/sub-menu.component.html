@@ -8,13 +8,13 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link nav-link-auth font-weight-bold" href="#">My Adverts</a>
-        </li>      
+          <a class="nav-link nav-link-auth font-weight-bold" href="#" [routerLink]="['/my-adverts']">My Adverts</a>
+        </li>  
         <li class="nav-item">
             <a class="nav-link nav-link-auth font-weight-bold" href="#">Buy a House</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link nav-link-auth font-weight-bold" href="#">Sell a house</a>
+            <a class="nav-link nav-link-auth font-weight-bold" [routerLink]="['/adverts/0/edit']">Sell a house</a>
         </li>
         <li class="nav-item">
             <a class="nav-link nav-link-auth font-weight-bold" href="#">Manage my Account</a>
@@ -38,3 +38,5 @@
     </div>
     </div>
   </nav>
+
+    <!-- adverts/0/edit -->

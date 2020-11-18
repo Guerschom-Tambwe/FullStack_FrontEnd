@@ -9,3 +9,11 @@ export class User {
     role: string;
     token?: string;
 }
+
+export class RegisterUser {
+    email: string;
+    password: string;
+    confirmPassword: string;
+    forenames: string;
+    surname: string;
+}

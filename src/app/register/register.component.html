@@ -46,9 +46,8 @@
                 <span class="invalid-feedback">{{confirmPasswordValidationMessage}}</span>
             </div>
 
-            <!--<input type="text" formControlName="role" class="automaticRole" hidden>-->
-
-            <button [disabled]="loading" class="btn btn-danger btn-lg d-block mx-auto">
+            <button [disabled]="loading || !registrationForm.valid" class="btn btn-danger btn-lg d-block mx-auto" 
+            [ngClass]="{'disabled': !registrationForm.valid }">
                     <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                     Register
                 </button>

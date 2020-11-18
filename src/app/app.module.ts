@@ -22,6 +22,12 @@ import { RegisterComponent } from './register/register.component'
 ;
 import { MyAdvertsComponent } from './my-adverts/my-adverts.component';;
 import { AlertComponent } from './shared/alert/alert.component'
+;
+import { AdvertsEditComponent } from './adverts-edit/adverts-edit.component'
+;
+import { AdvertDeleteComponent } from './advert-delete/advert-delete.component'
+;
+import { AdvertHideComponent } from './advert-hide/advert-hide.component'
 
 @NgModule({
     imports: [       
@@ -35,14 +41,18 @@ import { AlertComponent } from './shared/alert/alert.component'
         HomeComponent,
         LoginComponent,
         MainNavigationComponent,
-        SubMenuComponent ,
-        FooterComponent ,
-        RegisterComponent ,
-        MyAdvertsComponent ,
-        AlertComponent],
+        SubMenuComponent,
+        FooterComponent,
+        RegisterComponent,
+        MyAdvertsComponent,
+        AlertComponent,
+        AdvertsEditComponent,
+        AdvertDeleteComponent,
+        AdvertHideComponent
+    ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 
         // provider used to create fake backend
         //fakeBackendProvider

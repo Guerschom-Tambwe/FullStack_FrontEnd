@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
             password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(100)]],
         });
 
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/my-adverts';
 
         const emailInputControl = this.loginForm.get('email');
         emailInputControl.valueChanges.pipe(

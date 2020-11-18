@@ -8,6 +8,9 @@ import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './_helpers';
 import { LoginGuard } from './login/login.guard';
 import { RegistrationGuard } from './register/registration.guard';
+import { AdvertsEditComponent } from './adverts-edit/adverts-edit.component';
+import { AdvertDeleteComponent } from './advert-delete/advert-delete.component';
+import { AdvertHideComponent } from './advert-hide/advert-hide.component';
 
 const routes: Routes = [
     //{ path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -16,8 +19,11 @@ const routes: Routes = [
     { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
     { path: 'register', component: RegisterComponent, canActivate: [RegistrationGuard]},
     { path: 'my-adverts', component: MyAdvertsComponent, canActivate: [AuthGuard] },
-    
-
+    { path: 'adverts/:id/edit', component: AdvertsEditComponent, canActivate: [AuthGuard] },
+    { path: 'adverts/:id/delete', component: AdvertDeleteComponent, canActivate: [AuthGuard] },
+    { path: 'adverts/:id/hideorshow', component: AdvertHideComponent, canActivate: [AuthGuard] },
+    // AdvertHideComponent
+  
     // otherwise redirect to home
     { path: '**', redirectTo: '' }
 ];

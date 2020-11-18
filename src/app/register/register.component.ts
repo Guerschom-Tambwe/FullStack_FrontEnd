@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MustMatch } from '@app/_helpers/must-match-validator';
 import { AccountService, AlertService } from '@app/_services';
 import { debounceTime, first } from 'rxjs/operators';
+import { RegisterUser } from '../_models'
 
 @Component({
   selector: 'app-register',
@@ -169,6 +170,8 @@ confirmPasswordControl.valueChanges.pipe(
     }
   }
 
+  
+
    onSubmit():void {
        this.submitted = true;
 
@@ -180,13 +183,19 @@ confirmPasswordControl.valueChanges.pipe(
            return;
        }
 
+       let registerUser = new RegisterUser();
+       registerUser.forenames = this.registrationForm.get('forenames').value;
+       registerUser.surname = this.registrationForm.get('surname').value;
+       registerUser.email = this.registrationForm.get('email').value;
+       registerUser.password = this.registrationForm.get('password').value;
+       registerUser.confirmPassword = this.registrationForm.get('confirmPassword').value;
+
+
        this.loading = true;
-       this.accountService.register(this.registrationForm.value)
-           .pipe(first())
+       this.accountService.register(registerUser)
            .subscribe({
                next: () => {
               this.accountService.login(this.f.email.value, this.f.password.value)
-              .pipe(first())
               .subscribe(
                   data => {
                     this.alertService.success('Thank you for registering with ToLet.', 

@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+
+* {
+    font-family: 'Rubik', sans-serif;
+}
+
+.submit
+ {
+    background: #AF0868 !important;
+    border-color:#AF0868 !important; 
+}
+
+.invalid-feedback {
+    color: hsl(192, 42%, 5%) !important;
+}
+
+.submit :not(.disabled):hover
+ {
+    background: #fff !important;
+    border-color:#AF0868 !important; 
+    color: #AF0868;
+}
+
+.disabled:hover {
+    cursor: not-allowed;
+    background: #AF0868 !important;
+    border-color:#AF0868 !important;
+}
+
+.editAdverts {
+    background: #ccc;
+}

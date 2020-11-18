@@ -5,7 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
-import { User } from '@app/_models';
+import { RegisterUser, User } from '@app/_models';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
@@ -41,8 +41,8 @@ export class AccountService {
         this.router.navigate(['/home']);
     }
 
-    register(user: User) :Observable<User>{
-        return this.http.post<User>(`${environment.apiUrl}/api/users/newuser/register`, user);
+    register(user: RegisterUser) :Observable<RegisterUser>{
+        return this.http.post<RegisterUser>(`${environment.apiUrl}/api/users/newuser/register`, user);
     }
 
     getAll(): Observable<User> {

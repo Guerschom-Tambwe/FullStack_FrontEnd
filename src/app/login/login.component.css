@@ -14,8 +14,15 @@
     background: #ccc
 }
 
-.btn:hover {
+.btn:not(.disabled):hover
+ {
     background: #fff !important;
     border-color:#AF0868 !important; 
     color: #AF0868;
+}
+
+.disabled:hover {
+    cursor: not-allowed;
+    background: #AF0868 !important;
+    border-color:#AF0868 !important;
 }
