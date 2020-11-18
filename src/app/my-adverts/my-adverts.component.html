@@ -28,39 +28,19 @@
                     aria-expanded="false">
                       Actions
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item text-info" [routerLink]="['/adverts', myad.advertId, 'edit']"> Edit</a>
-                      <a class="dropdown-item text-info" [routerLink]="['/adverts', myad.advertId, 'hideorshow']">Hide</a>
-                      <a class="dropdown-item text-info" data-toggle="modal" data-target="#exampleModal" 
+                    <div class="dropdown-menu" 
+                    aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item text-info" 
+                      [routerLink]="['/adverts', myad.advertId, 'edit']"> Edit</a>
+                      <a class="dropdown-item text-info" 
+                      [routerLink]="['/adverts', myad.advertId, 'hideorshow']">Hide</a>
+                      <a class="dropdown-item text-info" 
+                      data-toggle="modal" data-target="#exampleModal" 
                       [routerLink]="['/adverts', myad.advertId, 'delete']"> Delete</a>
 
                     </div>
                   </div>
-                
-                  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Delete Advert?</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Are you sure you want to delete this advert? This action cannot be undone. Are you sure you want to continue?</p>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                          <h3>{{myad.advertId}}</h3>
-                          <button type="button" class="btn btn-primary" (click) = "deleteAdvert(myad.advertId)">Yes, delete</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-
-                
+                </div>              
             </div>
         </div>
     </div>
