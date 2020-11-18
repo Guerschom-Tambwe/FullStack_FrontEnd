@@ -45,15 +45,15 @@ export class AdvertsEditComponent implements OnInit {
   private advertDetailsValidationMessages = {
     required: 'Please enter a advertDetails',
     pattern: 'Invalid sentence entered. Avoid excessive use of special characters',
-    min: 'Please enter at a minimum value of of 100000',
-    max: 'Please do not surpass the maximum value of 100000000'
+    minlength: 'Please enter at least 10 characters',
+    maxlength: 'Please enter no more than 1000 characters',
   }
 
 
   private priceValidationMessages = {
     required: 'Please enter your price.',
-    min: 'Please enter at least 10000 characters',
-    max: 'Please enter no more than 100000000 characters'
+    min: 'Please enter at a minimum value of of 100000',
+    max: 'Please do not surpass the maximum value of 100000000'
   }
 
   private sub: Subscription;
