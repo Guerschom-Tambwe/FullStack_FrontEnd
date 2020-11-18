@@ -158,7 +158,7 @@ export class AdvertsEditComponent implements OnInit {
 
      const provinceControl = this.advertsForm.get('province');
      provinceControl.valueChanges.pipe(
-       debounceTime(1000)
+      //  debounceTime(1000)
      ).subscribe(
        value => {
          let provinces:Province[] = this.provinces.filter(x => x.provinceName == value);
