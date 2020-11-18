@@ -193,7 +193,6 @@ setHeadlineValidationMessage(c: AbstractControl):void {
   if((c.touched || c.dirty) && c.errors){
     this.headlineValidationMessage = Object.keys(c.errors).map(
       key => this.headlineValidationMessages[key]).join(' ');
-      console.log(this.headlineValidationMessage)
   }
 
 }
@@ -203,7 +202,6 @@ setadvertDetailsValidationMessage(c: AbstractControl):void {
   if((c.touched || c.dirty) && c.errors){
     this.advertDetailsValidationMessage = Object.keys(c.errors).map(
       key => this.advertDetailsValidationMessages[key]).join(' ');
-      console.log(this.advertDetailsValidationMessage)
   }
 
 }
@@ -213,7 +211,6 @@ setPriceValidationMessage(c: AbstractControl):void {
   if((c.touched || c.dirty) && c.errors){
     this.priceValidationMessage = Object.keys(c.errors).map(
       key => this.priceValidationMessages[key]).join(' ');
-      console.log(this.priceValidationMessage)
   }
 }
 

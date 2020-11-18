@@ -42,14 +42,12 @@ export class AdvertDeleteComponent implements OnInit {
 
   deleteAdvert(id: number): void{
     this.loading = true;
-    console.log(id);
     this.advertService.getAd(id).subscribe({
       next: ads => {
         ads.advertStatus = "DELETED";
       
       this.advertService.updateAd(ads).subscribe({
         next: (ads) => {
-          console.log(ads);
           this.alertService.success('Your advert is successfully deleted.', 
           { keepAfterRouteChange: true });
           this.router.navigate(['/my-adverts']);

@@ -41,7 +41,6 @@ export class AdvertHideComponent implements OnInit {
 
   HideOrUnhideAdvert(id: number): void{
     this.loading = true;
-    console.log(id);
     this.advertService.getAd(id).subscribe({
       next: ads => {
         if(ads.advertStatus == "LIVE"){
@@ -53,7 +52,6 @@ export class AdvertHideComponent implements OnInit {
          
       this.advertService.updateAd(ads).subscribe({
         next: (ads) => {
-          console.log(ads);
 
           if(ads.advertStatus == "LIVE"){
             this.alertService.success('Your advert is live again.', 
