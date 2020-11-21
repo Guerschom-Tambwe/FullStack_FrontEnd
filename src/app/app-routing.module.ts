@@ -11,6 +11,7 @@ import { RegistrationGuard } from './register/registration.guard';
 import { AdvertsEditComponent } from './adverts-edit/adverts-edit.component';
 import { AdvertDeleteComponent } from './advert-delete/advert-delete.component';
 import { AdvertHideComponent } from './advert-hide/advert-hide.component';
+import { HomesForSaleComponent } from './homes-for-sale/homes-for-sale.component';
 
 const routes: Routes = [
     //{ path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -22,6 +23,7 @@ const routes: Routes = [
     { path: 'adverts/:id/edit', component: AdvertsEditComponent, canActivate: [AuthGuard] },
     { path: 'adverts/:id/delete', component: AdvertDeleteComponent, canActivate: [AuthGuard] },
     { path: 'adverts/:id/hideorshow', component: AdvertHideComponent, canActivate: [AuthGuard] },
+    { path: 'homes-for-sale', component: HomesForSaleComponent, canActivate: [AuthGuard] },
     // AdvertHideComponent
   
     // otherwise redirect to home

@@ -70,8 +70,6 @@ export class AdvertHideComponent implements OnInit {
             this.loading = true;
           }
     });
-
-
   }
 
   ngOnDestroy(): void {

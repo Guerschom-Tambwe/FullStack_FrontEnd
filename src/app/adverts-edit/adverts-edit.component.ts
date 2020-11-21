@@ -63,7 +63,8 @@ export class AdvertsEditComponent implements OnInit {
               private fb: FormBuilder, 
               private route: ActivatedRoute,
               private alertService: AlertService,
-              private provinceService: ProvinceService) { }
+              private provinceService: ProvinceService) { 
+              }
 
 
   ngOnInit(): void {
@@ -75,16 +76,11 @@ export class AdvertsEditComponent implements OnInit {
             Validators.maxLength(100), 
             Validators.pattern("^[a-zA-Z0-9,'-](?!.*  )[a-zA-Z0-9,.' ]*[a-zA-Z0-9,.']$")]],
       advertDetails: ['', [Validators.required, Validators.minLength(10), 
-            Validators.maxLength(1000), 
-            Validators.pattern("^[a-zA-Z0-9,'-](?!.*  )[a-zA-Z0-9,.' ]*[a-zA-Z0-9,.']$")]],
-      province: ['', 
-            Validators.required],
-      city: ['', [
-            Validators.required]],
-      price: ['', [
-            Validators.required, 
-            Validators.min(10000), 
-            Validators.max(100000000)]]
+                      Validators.maxLength(1000), 
+                      Validators.pattern("^[a-zA-Z0-9,'-](?!.*  )[a-zA-Z0-9,.' ]*[a-zA-Z0-9,.']$")]],
+      province: ['', Validators.required],
+      city: ['', [ Validators.required]],
+      price: ['', [ Validators.required, Validators.min(10000), Validators.max(100000000)]]
     });
 
     this.getProvinces();
@@ -126,7 +122,7 @@ export class AdvertsEditComponent implements OnInit {
 
      // Updating the data on the form
      this.advertsForm.patchValue({
-      header: this.advert.headline,
+      headline: this.advert.headline,
       province: this.advert.province,
       city: this.advert.city,
       advertDetails: this.advert.advertDetails,
@@ -156,18 +152,37 @@ export class AdvertsEditComponent implements OnInit {
        value => this.setPriceValidationMessage(priceControl)
      );
 
-     const provinceControl = this.advertsForm.get('province');
-     provinceControl.valueChanges.pipe(
-      //  debounceTime(1000)
-     ).subscribe(
-       value => {
-         let provinces:Province[] = this.provinces.filter(x => x.provinceName == value);
-         this.provinceCities = provinces[0].cities;
-        }
-     );
+     this.populateCitiesControl();
+      
 }
 
-getProvinces(){
+   populateCitiesControl(){
+    const provinceControl: AbstractControl = this.advertsForm.get('province');
+    //Aplicable when the form is in Edit mode
+     if(!provinceControl.touched && provinceControl.value !== null){
+      this.provinceService.getCitiesByProvineName(provinceControl.value).subscribe({
+        next: province => {
+          this.provinceCities = province?.cities;
+        },  
+        error: err => this.errorMessage = err
+      });
+     }
+    
+    //Always applicable to the form
+    provinceControl.valueChanges.pipe(
+    ).subscribe(
+      value => {
+        this.provinceService.getCitiesByProvineName(value).subscribe({
+          next: province => {
+            this.provinceCities = province?.cities;
+          },  
+          error: err => this.errorMessage = err
+        });
+        }
+    );  
+}
+
+getProvinces():void{
   this.provinceService.getProvinces().subscribe({
     next: provinces => {
       this.provinces = provinces;
@@ -175,8 +190,6 @@ getProvinces(){
     error: err => this.errorMessage = err
   });
 }
-
-
 
 
 

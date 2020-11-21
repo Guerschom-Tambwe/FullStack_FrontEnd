@@ -28,6 +28,8 @@ import { AdvertsEditComponent } from './adverts-edit/adverts-edit.component'
 import { AdvertDeleteComponent } from './advert-delete/advert-delete.component'
 ;
 import { AdvertHideComponent } from './advert-hide/advert-hide.component'
+;
+import { HomesForSaleComponent } from './homes-for-sale/homes-for-sale.component'
 
 @NgModule({
     imports: [       
@@ -48,7 +50,8 @@ import { AdvertHideComponent } from './advert-hide/advert-hide.component'
         AlertComponent,
         AdvertsEditComponent,
         AdvertDeleteComponent,
-        AdvertHideComponent
+        AdvertHideComponent,
+        HomesForSaleComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

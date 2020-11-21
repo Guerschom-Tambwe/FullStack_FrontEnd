@@ -28,6 +28,13 @@ getAds(): Observable<DisplayAdvert[]>{
       );
 }
 
+getAdsByUserId(id: number): Observable<DisplayAdvert[]>{
+  return this.http.get<DisplayAdvert[]>(`${this.adsUrl}/currentuser/${id}`).pipe(
+      //tap(data => console.log('All: ' + JSON.stringify(data))),
+      catchError(this.handleError)
+      );
+}
+
   getAd(id: number): Observable<DisplayAdvert> {
     if (id === 0) {
       return of(this.initializeDisplayAdvert());

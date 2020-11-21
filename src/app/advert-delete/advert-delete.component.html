@@ -12,6 +12,7 @@
                 <p class="card-text">{{myAdvert?.advertDetails}}</p><br>
                 <p class="font-weight-bold h5">{{myAdvert?.price | currency:"ZAR":"symbol-narrow":"1.2-2"}}</p>
                 </div>
+                {{myAdvert.advertId}}
                 <div class="actions ml-auto col-md-4">
                 <p>Status <span class="badge {{myAdvert?.advertStatus == 'LIVE'? 'badge-warning': 'badge-danger'}}">{{myAdvert?.advertStatus}}</span></p>
                     <button *ngIf="loading" type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" aria-haspopup="true" aria-expanded="false">

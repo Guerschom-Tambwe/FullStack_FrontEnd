@@ -1,80 +1,66 @@
 <div class="container mt-5 pt-2">
-    <div>
-        <h1>{{pageTitle}}</h1>
-        <hr>
-    </div>
-    <form novalidate [formGroup]= "advertsForm" class="editAdverts p-4 shadow rounded" (ngSubmit)="saveAd()">
+    <div><h1>{{pageTitle}}</h1><hr></div>
+    <form novalidate [formGroup]= "advertsForm" class="editAdverts p-4 shadow rounded" 
+    (ngSubmit)="saveAd()">     
+      <div class="form-group">
+        <label class="mr-sm-2" for="inlineFormCustomSelect">
+        Headline (required, 10 to 100 characters)</label>
+        <input type="text" class="form-control"  formControlName="headline" id="header" 
+        [ngClass]="{'is-invalid': headlineValidationMessage}">
+        <span class="invalid-feedback">{{headlineValidationMessage}}</span>
+      </div>
         
       <div class="form-group">
-        <label class="mr-sm-2" for="inlineFormCustomSelect">Headline (required, 10 to 100 characters)</label>
-          <input type="text" class="form-control"  formControlName="headline"
-          id="header" [ngClass]="{'is-invalid': headlineValidationMessage}">
-          <span class="invalid-feedback">{{headlineValidationMessage}}</span>
-        </div>
-        
-        <div class="form-group">
-        <label class="mr-sm-2" 
-        for="inlineFormCustomSelect">
+        <label class="mr-sm-2" for="inlineFormCustomSelect">
         Description (required, 10 to 1000 characters)
         </label>
-          <textarea type="text" 
-          class="form-control" 
-          id="description"  
-          [ngClass]="{'is-invalid': advertDetailsValidationMessage}"
-          formControlName="advertDetails" 
-          cols="100" rows="5">
-          </textarea>
-          <span class="invalid-feedback">
-            {{advertDetailsValidationMessage}}
-          </span>
-        </div>
+        <textarea type="text" class="form-control" id="description" 
+        [ngClass]="{'is-invalid': advertDetailsValidationMessage}" 
+        formControlName="advertDetails" cols="100" rows="5">
+        </textarea>
+        <span class="invalid-feedback">{{advertDetailsValidationMessage}}</span>
+      </div>
         
-        <div class="form-group">
-          <label class="mr-sm-2" 
-          for="inlineFormCustomSelect">
-          Province (required)</label>
-           <select class="custom-select mr-sm-2" 
-           id="inlineFormCustomSelect" 
-           formControlName="province" 
-           [ngClass]="{'is-invalid': (f.province.touched || f.province.dirty) && f.province.errors}"
-           >
-            <option *ngFor="let province of provinces" value="{{province.provinceName}}">{{province.provinceName}}</option>
-          </select>
-            <br/><span class="invalid-feedback" *ngIf ="f.province.errors">Please select a province</span>
-          </div>
-          <div class="form-group">
-            <label class="mr-sm-2" 
-            for="inlineFormCustomSelect">City (required)
-            </label>
-            <select class="custom-select mr-sm-2" 
-            id="inlineFormCustomSelect" formControlName="city" 
-            placeholder="Select province"
-            [ngClass]="{'is-invalid': (f.city.touched || f.city.dirty) && f.city.errors}">
-            <option *ngFor="let city of provinceCities" 
-            value="{{city.cityName}}">
-            {{city.cityName}}</option>
-          </select>
-            <br/>
-            <span class="invalid-feedback" 
-            *ngIf ="this.f.city.errors">Please select a city</span>
-          </div>
-        <div class="form-group">
-        <label class="mr-sm-2" 
-        for="inlineFormCustomSelect">Price (required)</label>
-            <input type="number" 
-            step="0.01" formControlName="price" 
-            [ngClass]="{'is-invalid': priceValidationMessage}"
-            class="form-control" id="Price">
-            <span class="invalid-feedback">{{priceValidationMessage}}</span>
-          </div>
-          <button type="button" class="btn btn-lg btn-outline-default d-inline-block mr-1 cancel" [routerLink]="['/my-adverts']">Cancel</button>
-            <button [disabled]="loading || !advertsForm" 
-            [ngClass]="{'disabled': !advertsForm.valid }" 
-            type="submit" class="btn btn-lg btn-primary 
-            d-inline-block mx-auto ml-5 submit">
-            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span> 
-            Publish Advert</button>
-      </form>
-        
-    </div>
+      <div class="form-group">
+        <label class="mr-sm-2" for="inlineFormCustomSelect">Province (required)</label>
+          <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" formControlName="province" 
+          [ngClass]="{'is-invalid': (f.province.touched || f.province.dirty) && f.province.errors}"
+          >
+          <option *ngFor="let province of provinces" value="{{province.provinceName}}">
+          {{province.provinceName}}
+        </option>
+        </select>
+          <br/><span class="invalid-feedback" *ngIf ="f.province.errors">
+          Please select a province</span>
+      </div>
 
+      <div class="form-group">
+        <label class="mr-sm-2" for="inlineFormCustomSelect">City (required)</label>
+        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" 
+        formControlName="city" placeholder="Select province" 
+        [ngClass]="{'is-invalid': (f.city.touched || f.city.dirty) && f.city.errors}">
+          <option *ngFor="let city of provinceCities" value="{{city.cityName}}">
+          {{city.cityName}}
+          </option>
+        </select>
+        <br/>
+        <span class="invalid-feedback" *ngIf ="this.f.city.errors">Please select a city</span>
+      </div>
+
+      <div class="form-group">
+        <label class="mr-sm-2" for="inlineFormCustomSelect">Price (required)</label>
+        <input type="number" step="0.01" formControlName="price" 
+        [ngClass]="{'is-invalid': priceValidationMessage}" class="form-control" id="Price">
+        <span class="invalid-feedback">{{priceValidationMessage}}</span>
+      </div>
+
+      <button type="button" class="btn btn-lg btn-outline-default d-inline-block mr-1 cancel" 
+      [routerLink]="['/my-adverts']">Cancel</button>
+        
+      <button [disabled]="loading || !advertsForm" [ngClass]="{'disabled': !advertsForm.valid }" 
+      type="submit" class="btn btn-lg btn-primary d-inline-block mx-auto ml-5 submit">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span> 
+        Publish Advert
+      </button>
+      </form>        
+    </div>
